@@ -34,34 +34,25 @@
 
 <div class="container-contact100">
     <div class="wrap-contact100">
-        <form th:method="post" th:object="${document}" th:action="@{/show_arrivaldocument}" class="contact100-form validate-form">
+        <form th:method="post" th:object="${product}" th:action="@{/create_productlist}" class="contact100-form validate-form">
 				<span class="contact100-form-title">
-					Документ о поступлении товаров
+					Добавление товара
 				</span>
 
             <div class="wrap-input100 validate-input bg1" data-validate="Введите номер документа">
-                <span class="label-input100">Номер документа *</span>
+                <span class="label-input100">Артикул товара *</span>
                 <input th:field="*{id}" class="input100" type="text" name="name" placeholder="Введите номер документа">
             </div>
 
             <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Введите номер склада">
-                <span class="label-input100">Номер склада *</span>
-                <input th:field="*{store_id}" class="input100" type="text" name="email" placeholder="Введите номер склада ">
+                <span class="label-input100">Наименование товара *</span>
+                <input th:field="*{name}" class="input100" type="text" name="email" placeholder="Введите номер склада ">
             </div>
 
-
-
-             <div th:each="product:${document.productList}" class="wrap-input100 input100-select bg1">
-                 <span  class="label-input100"> Aртикул товара: </span>
-                 <span th:text="${product.id}" class="label-input100"></span>
-                 <span  class="label-input100"> Наименование товара: </span>
-                 <span th:text="${product.name}" class="label-input100"></span>
-             </div>
-
-            <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn">
+            <div class="container-addproduct">
+                <button class="contact100-addproduct">
 						<span>
-							Оформить документ
+							Добавить товар в документ
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 						</span>
                 </button>
