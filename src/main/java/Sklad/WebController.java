@@ -13,6 +13,7 @@ import java.util.List;
 public class WebController {
     private ArrivalDocument arrivalDocument;
     private Product product;
+    private RetrofitComponent retrofitComponent;
     @Autowired
     public void setArrivalDocument(ArrivalDocument arrivalDocument) {
         this.arrivalDocument = arrivalDocument;
@@ -20,6 +21,10 @@ public class WebController {
     @Autowired
     public void setProduct(Product product) {
         this.product = product;
+    }
+    @Autowired
+    public void setRetrofitComponent(RetrofitComponent retrofitComponent) {
+        this.retrofitComponent = retrofitComponent;
     }
 
     @RequestMapping("/")
@@ -38,8 +43,17 @@ public class WebController {
         return "create_arrivaldocument";
     }
     @RequestMapping("/show_arrivaldocument")
-    public String showArrivalDocument(@ModelAttribute(name = "document")ArrivalDocument document)
+    public String showArrivalDocument(Model model)
     {
+        List<String> result=retrofitComponent.callApi(arrivalDocument);
+        if (!(result.size()==0)) {
+            model.addAttribute("status",result );
+        }
+        else
+        {
+            result.add("Невозможно выполнить операцию");
+            model.addAttribute("status",result);
+        }
         return "show_arrivaldocument";
     }
     @RequestMapping("/add_product")
